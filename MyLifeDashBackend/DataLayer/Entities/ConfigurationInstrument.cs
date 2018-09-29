@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace DataLayer.Entities
 {
@@ -8,6 +7,7 @@ namespace DataLayer.Entities
         [Key]
         public int Id { get; set; }
         public float Percentaje { get; set; }
-        public virtual List<CatInstrument> CatInstruments { get; set; }
+        public CatInstrument CatInstruments { get; set; }
+        public Configuration Configuration { get; set; }
     }
 }

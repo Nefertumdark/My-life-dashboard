@@ -10,5 +10,7 @@ namespace DataLayer.Entities
         public float Total { get; set; }
         public float Gain { get; set; }
         public DateTime Date { get; set; }
+        public Section Section { get; set; }
+        public Configuration Configuration { get; set; }
     }
 }

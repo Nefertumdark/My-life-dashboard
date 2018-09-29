@@ -1,5 +1,6 @@
 ﻿using DataLayer;
 using DataLayer.Entities;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace ConsoleDash
     {
         static void Main(string[] args)
         {
-            var repo = new DashDbRepo<Plugin>();
+            var repo = new DashRepo<Plugin>();
             repo.Add(new Plugin() { Name = "Test" });
         }
     }

@@ -2,18 +2,19 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace DataLayer
 {
-    public class DashDbRepo<T> : IRepository<T> where T : EntityBase
+    public class DashRepo<T> : IRepository<T> where T : EntityBase
     {
-        private readonly ApplicationDbContext _dbContext;
+        private readonly DashContext _dbContext;
 
-        public DashDbRepo()
+        public DashRepo()
         {
-            _dbContext = new ApplicationDbContext();
+            _dbContext = new DashContext();
         }
 
         public virtual T GetById(int id)
@@ -52,11 +53,18 @@ namespace DataLayer
         }
     }
 
-    public class ApplicationDbContext : DbContext
+    public interface IRepository<T> where T : EntityBase
     {
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlite("Data Source=DashDB.db");
-        }
+        T GetById(int id);
+        IEnumerable<T> List();
+        IEnumerable<T> List(Expression<Func<T, bool>> predicate);
+        void Add(T entity);
+        void Delete(T entity);
+        void Edit(T entity);
+    }
+
+    public abstract class EntityBase
+    {
+        public int Id { get; protected set; }
     }
 }

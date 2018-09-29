@@ -11,7 +11,8 @@ namespace DataLayer.Entities
         public string Description { get; set; }
         public float Total { get; set; }
         public float Gain { get; set; }
-        public virtual List<HistoricalEntry> Sections { get; set; }
-        public virtual Configuration Configuration { get; set; }
+        public List<HistoricalEntry> Sections { get; set; }
+        public Configuration Configuration { get; set; }
+        public Plugin Plugin { get; set; }
     }
 }
