@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DataLayer.Entities
 {
-    public class HistoricalEntry : EntityBase
+    public class HistoricalEntry
     {
         [Key]
         public int Id { get; set; }

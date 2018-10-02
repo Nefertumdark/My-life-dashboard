@@ -2,7 +2,7 @@
 
 namespace DataLayer.Entities
 {
-    public class ConfigurationInstrument : EntityBase
+    public class ConfigurationInstrument
     {
         [Key]
         public int Id { get; set; }

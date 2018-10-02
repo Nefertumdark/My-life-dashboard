@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DataLayer.Entities
 {
-    public class CatInstrument : EntityBase
+    public class CatInstrument
     {
         [Key]
         public int Id { get; set; }

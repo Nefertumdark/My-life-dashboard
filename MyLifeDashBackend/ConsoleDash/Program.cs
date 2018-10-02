@@ -13,8 +13,19 @@ namespace ConsoleDash
     {
         static void Main(string[] args)
         {
-            var repo = new DashRepo<Plugin>();
-            repo.Add(new Plugin() { Name = "Test" });
+            using (var db = new DashContext())
+            {
+                db.Plugins.Add(new Plugin { Name = "TestX" });
+                var count = db.SaveChanges();
+                Console.WriteLine("{0} records saved to database", count);
+
+                Console.WriteLine();
+                Console.WriteLine("All blogs in database:");
+                foreach (var plugin in db.Plugins)
+                {
+                    Console.WriteLine(" - {0}", plugin.Name);
+                }
+            }
         }
     }
 }

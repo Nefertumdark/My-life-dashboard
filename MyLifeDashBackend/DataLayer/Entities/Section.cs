@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DataLayer.Entities
 {
-    public class Section : EntityBase
+    public class Section
     {
         [Key]
         public int Id { get; set; }

@@ -141,7 +141,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DashContext.cs" />
-    <Compile Include="DashRepo.cs" />
     <Compile Include="Entities\CatInstrument.cs" />
     <Compile Include="Entities\Configuration.cs" />
     <Compile Include="Entities\ConfigurationInstrument.cs" />

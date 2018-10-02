@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataLayer.Entities
 {
-    public class Configuration : EntityBase
+    public class Configuration
     {
         [Key]
         [ForeignKey("Section")]
