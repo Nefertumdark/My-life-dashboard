@@ -25,7 +25,7 @@ namespace DataLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CatInstrumments");
+                    b.ToTable("CatInstruments");
                 });
 
             modelBuilder.Entity("DataLayer.Entities.Configuration", b =>

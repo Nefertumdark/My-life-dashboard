@@ -10,7 +10,7 @@ namespace DataLayer
         public DbSet<Configuration> Configuration { get; set; }
         public DbSet<HistoricalEntry> HistoricalEntries { get; set; }
         public DbSet<ConfigurationInstrument> ConfigurationInstruments { get; set; }
-        public DbSet<CatInstrument> CatInstrumments { get; set; }
+        public DbSet<CatInstrument> CatInstruments { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

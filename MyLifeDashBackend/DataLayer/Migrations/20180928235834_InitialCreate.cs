@@ -8,7 +8,7 @@ namespace DataLayer.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "CatInstrumments",
+                name: "CatInstruments",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -17,7 +17,7 @@ namespace DataLayer.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CatInstrumments", x => x.Id);
+                    table.PrimaryKey("PK_CatInstruments", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -89,9 +89,9 @@ namespace DataLayer.Migrations
                 {
                     table.PrimaryKey("PK_ConfigurationInstruments", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ConfigurationInstruments_CatInstrumments_CatInstrumentsId",
+                        name: "FK_ConfigurationInstruments_CatInstruments_CatInstrumentsId",
                         column: x => x.CatInstrumentsId,
-                        principalTable: "CatInstrumments",
+                        principalTable: "CatInstruments",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -166,7 +166,7 @@ namespace DataLayer.Migrations
                 name: "HistoricalEntries");
 
             migrationBuilder.DropTable(
-                name: "CatInstrumments");
+                name: "CatInstruments");
 
             migrationBuilder.DropTable(
                 name: "Configuration");
