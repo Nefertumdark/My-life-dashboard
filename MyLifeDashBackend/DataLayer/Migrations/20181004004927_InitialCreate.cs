@@ -21,6 +21,20 @@ namespace DataLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Configuration",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(nullable: true),
+                    Taxes = table.Column<float>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Configuration", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Plugins",
                 columns: table => new
                 {
@@ -31,50 +45,6 @@ namespace DataLayer.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Plugins", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Sections",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true),
-                    Total = table.Column<float>(nullable: false),
-                    Gain = table.Column<float>(nullable: false),
-                    PluginId = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Sections", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Sections_Plugins_PluginId",
-                        column: x => x.PluginId,
-                        principalTable: "Plugins",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Configuration",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(nullable: true),
-                    Taxes = table.Column<float>(nullable: false),
-                    SectionRefId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Configuration", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Configuration_Sections_SectionRefId",
-                        column: x => x.SectionRefId,
-                        principalTable: "Sections",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -100,6 +70,36 @@ namespace DataLayer.Migrations
                         name: "FK_ConfigurationInstruments_Configuration_ConfigurationId",
                         column: x => x.ConfigurationId,
                         principalTable: "Configuration",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Sections",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    Total = table.Column<float>(nullable: false),
+                    Gain = table.Column<float>(nullable: false),
+                    ConfigurationRefId = table.Column<int>(nullable: false),
+                    PluginId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Sections", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Sections_Configuration_ConfigurationRefId",
+                        column: x => x.ConfigurationRefId,
+                        principalTable: "Configuration",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Sections_Plugins_PluginId",
+                        column: x => x.PluginId,
+                        principalTable: "Plugins",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -134,12 +134,6 @@ namespace DataLayer.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Configuration_SectionRefId",
-                table: "Configuration",
-                column: "SectionRefId",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
                 name: "IX_ConfigurationInstruments_CatInstrumentsId",
                 table: "ConfigurationInstruments",
                 column: "CatInstrumentsId");
@@ -160,6 +154,12 @@ namespace DataLayer.Migrations
                 column: "SectionId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Sections_ConfigurationRefId",
+                table: "Sections",
+                column: "ConfigurationRefId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Sections_PluginId",
                 table: "Sections",
                 column: "PluginId");
@@ -177,10 +177,10 @@ namespace DataLayer.Migrations
                 name: "CatInstruments");
 
             migrationBuilder.DropTable(
-                name: "Configuration");
+                name: "Sections");
 
             migrationBuilder.DropTable(
-                name: "Sections");
+                name: "Configuration");
 
             migrationBuilder.DropTable(
                 name: "Plugins");

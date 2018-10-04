@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataLayer.Entities
 {
@@ -12,8 +11,6 @@ namespace DataLayer.Entities
         public float Taxes { get; set; }
         public List<HistoricalEntry> HistoricalEntries { get; set; }
         public List<ConfigurationInstrument> ConfigurationInstruments { get; set; }
-        [ForeignKey("Section")]
-        public int SectionRefId { get; set; }
         public Section Section { get; set; }
     }
 }

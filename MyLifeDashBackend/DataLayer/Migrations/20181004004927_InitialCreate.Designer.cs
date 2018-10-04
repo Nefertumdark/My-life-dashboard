@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataLayer.Migrations
 {
     [DbContext(typeof(DashContext))]
-    [Migration("20181004001914_InitialCreate")]
+    [Migration("20181004004927_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,14 +37,9 @@ namespace DataLayer.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<int>("SectionRefId");
-
                     b.Property<float>("Taxes");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("SectionRefId")
-                        .IsUnique();
 
                     b.ToTable("Configuration");
                 });
@@ -110,6 +105,8 @@ namespace DataLayer.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int>("ConfigurationRefId");
+
                     b.Property<string>("Description");
 
                     b.Property<float>("Gain");
@@ -122,17 +119,12 @@ namespace DataLayer.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ConfigurationRefId")
+                        .IsUnique();
+
                     b.HasIndex("PluginId");
 
                     b.ToTable("Sections");
-                });
-
-            modelBuilder.Entity("DataLayer.Entities.Configuration", b =>
-                {
-                    b.HasOne("DataLayer.Entities.Section", "Section")
-                        .WithOne("Configuration")
-                        .HasForeignKey("DataLayer.Entities.Configuration", "SectionRefId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("DataLayer.Entities.ConfigurationInstrument", b =>
@@ -159,6 +151,11 @@ namespace DataLayer.Migrations
 
             modelBuilder.Entity("DataLayer.Entities.Section", b =>
                 {
+                    b.HasOne("DataLayer.Entities.Configuration", "Configuration")
+                        .WithOne("Section")
+                        .HasForeignKey("DataLayer.Entities.Section", "ConfigurationRefId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("DataLayer.Entities.Plugin", "Plugin")
                         .WithMany("Sections")
                         .HasForeignKey("PluginId");
