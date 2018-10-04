@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataLayer.Migrations
 {
     [DbContext(typeof(DashContext))]
-    [Migration("20180928235834_InitialCreate")]
+    [Migration("20181004001914_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -32,13 +32,19 @@ namespace DataLayer.Migrations
 
             modelBuilder.Entity("DataLayer.Entities.Configuration", b =>
                 {
-                    b.Property<int>("Id");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Name");
+
+                    b.Property<int>("SectionRefId");
 
                     b.Property<float>("Taxes");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("SectionRefId")
+                        .IsUnique();
 
                     b.ToTable("Configuration");
                 });
@@ -125,7 +131,7 @@ namespace DataLayer.Migrations
                 {
                     b.HasOne("DataLayer.Entities.Section", "Section")
                         .WithOne("Configuration")
-                        .HasForeignKey("DataLayer.Entities.Configuration", "Id")
+                        .HasForeignKey("DataLayer.Entities.Configuration", "SectionRefId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

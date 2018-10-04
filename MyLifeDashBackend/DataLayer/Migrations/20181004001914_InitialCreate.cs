@@ -60,16 +60,18 @@ namespace DataLayer.Migrations
                 name: "Configuration",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(nullable: true),
-                    Taxes = table.Column<float>(nullable: false)
+                    Taxes = table.Column<float>(nullable: false),
+                    SectionRefId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Configuration", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Configuration_Sections_Id",
-                        column: x => x.Id,
+                        name: "FK_Configuration_Sections_SectionRefId",
+                        column: x => x.SectionRefId,
                         principalTable: "Sections",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -130,6 +132,12 @@ namespace DataLayer.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Configuration_SectionRefId",
+                table: "Configuration",
+                column: "SectionRefId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_ConfigurationInstruments_CatInstrumentsId",
