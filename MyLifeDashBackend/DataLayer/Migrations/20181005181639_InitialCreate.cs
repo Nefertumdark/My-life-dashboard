@@ -11,66 +11,66 @@ namespace DataLayer.Migrations
                 name: "CatInstruments",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    CatInstrumentId = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CatInstruments", x => x.Id);
+                    table.PrimaryKey("PK_CatInstruments", x => x.CatInstrumentId);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Configuration",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    ConfigurationId = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(nullable: true),
                     Taxes = table.Column<float>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Configuration", x => x.Id);
+                    table.PrimaryKey("PK_Configuration", x => x.ConfigurationId);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Plugins",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    PluginId = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Plugins", x => x.Id);
+                    table.PrimaryKey("PK_Plugins", x => x.PluginId);
                 });
 
             migrationBuilder.CreateTable(
                 name: "ConfigurationInstruments",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    ConfigurationInstrumentId = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Percentaje = table.Column<float>(nullable: false),
-                    CatInstrumentsId = table.Column<int>(nullable: true),
+                    CatInstrumentsCatInstrumentId = table.Column<int>(nullable: true),
                     ConfigurationId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ConfigurationInstruments", x => x.Id);
+                    table.PrimaryKey("PK_ConfigurationInstruments", x => x.ConfigurationInstrumentId);
                     table.ForeignKey(
-                        name: "FK_ConfigurationInstruments_CatInstruments_CatInstrumentsId",
-                        column: x => x.CatInstrumentsId,
+                        name: "FK_ConfigurationInstruments_CatInstruments_CatInstrumentsCatInstrumentId",
+                        column: x => x.CatInstrumentsCatInstrumentId,
                         principalTable: "CatInstruments",
-                        principalColumn: "Id",
+                        principalColumn: "CatInstrumentId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_ConfigurationInstruments_Configuration_ConfigurationId",
                         column: x => x.ConfigurationId,
                         principalTable: "Configuration",
-                        principalColumn: "Id",
+                        principalColumn: "ConfigurationId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -78,7 +78,7 @@ namespace DataLayer.Migrations
                 name: "Sections",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    SectionId = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
@@ -89,18 +89,18 @@ namespace DataLayer.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Sections", x => x.Id);
+                    table.PrimaryKey("PK_Sections", x => x.SectionId);
                     table.ForeignKey(
                         name: "FK_Sections_Configuration_ConfigurationRefId",
                         column: x => x.ConfigurationRefId,
                         principalTable: "Configuration",
-                        principalColumn: "Id",
+                        principalColumn: "ConfigurationId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Sections_Plugins_PluginId",
                         column: x => x.PluginId,
                         principalTable: "Plugins",
-                        principalColumn: "Id",
+                        principalColumn: "PluginId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -108,7 +108,7 @@ namespace DataLayer.Migrations
                 name: "HistoricalEntries",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    HistoricalEntryId = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Total = table.Column<float>(nullable: false),
                     Gain = table.Column<float>(nullable: false),
@@ -118,25 +118,60 @@ namespace DataLayer.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_HistoricalEntries", x => x.Id);
+                    table.PrimaryKey("PK_HistoricalEntries", x => x.HistoricalEntryId);
                     table.ForeignKey(
                         name: "FK_HistoricalEntries_Configuration_ConfigurationId",
                         column: x => x.ConfigurationId,
                         principalTable: "Configuration",
-                        principalColumn: "Id",
+                        principalColumn: "ConfigurationId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_HistoricalEntries_Sections_SectionId",
                         column: x => x.SectionId,
                         principalTable: "Sections",
-                        principalColumn: "Id",
+                        principalColumn: "SectionId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.InsertData(
+                table: "CatInstruments",
+                columns: new[] { "CatInstrumentId", "Name" },
+                values: new object[] { 1, "Savings" });
+
+            migrationBuilder.InsertData(
+                table: "CatInstruments",
+                columns: new[] { "CatInstrumentId", "Name" },
+                values: new object[] { 2, "Equity MX" });
+
+            migrationBuilder.InsertData(
+                table: "CatInstruments",
+                columns: new[] { "CatInstrumentId", "Name" },
+                values: new object[] { 3, "Debt MX" });
+
+            migrationBuilder.InsertData(
+                table: "CatInstruments",
+                columns: new[] { "CatInstrumentId", "Name" },
+                values: new object[] { 4, "Others MX" });
+
+            migrationBuilder.InsertData(
+                table: "CatInstruments",
+                columns: new[] { "CatInstrumentId", "Name" },
+                values: new object[] { 5, "Equity Tech USA" });
+
+            migrationBuilder.InsertData(
+                table: "CatInstruments",
+                columns: new[] { "CatInstrumentId", "Name" },
+                values: new object[] { 6, "Equity USA" });
+
+            migrationBuilder.InsertData(
+                table: "CatInstruments",
+                columns: new[] { "CatInstrumentId", "Name" },
+                values: new object[] { 7, "Debt USA" });
+
             migrationBuilder.CreateIndex(
-                name: "IX_ConfigurationInstruments_CatInstrumentsId",
+                name: "IX_ConfigurationInstruments_CatInstrumentsCatInstrumentId",
                 table: "ConfigurationInstruments",
-                column: "CatInstrumentsId");
+                column: "CatInstrumentsCatInstrumentId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ConfigurationInstruments_ConfigurationId",

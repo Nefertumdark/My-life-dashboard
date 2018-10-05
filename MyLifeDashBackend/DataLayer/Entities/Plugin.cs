@@ -6,7 +6,7 @@ namespace DataLayer.Entities
     public class Plugin
     {
         [Key]
-        public int Id { get; set; }
+        public int PluginId { get; set; }
         public string Name { get; set; }
         public List<Section> Sections { get; set; }
     }

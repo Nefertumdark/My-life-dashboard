@@ -147,13 +147,9 @@
     <Compile Include="Entities\HistoricalEntry.cs" />
     <Compile Include="Entities\Plugin.cs" />
     <Compile Include="Entities\Section.cs" />
-    <Compile Include="Migrations\20181004004927_InitialCreate.cs" />
-    <Compile Include="Migrations\20181004004927_InitialCreate.designer.cs">
-      <DependentUpon>20181004004927_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20181005174857_SeedCatalogInstrument.cs" />
-    <Compile Include="Migrations\20181005174857_SeedCatalogInstrument.designer.cs">
-      <DependentUpon>20181005174857_SeedCatalogInstrument.cs</DependentUpon>
+    <Compile Include="Migrations\20181005181639_InitialCreate.cs" />
+    <Compile Include="Migrations\20181005181639_InitialCreate.designer.cs">
+      <DependentUpon>20181005181639_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\DashContextModelSnapshot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -164,6 +160,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="DashSQL.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

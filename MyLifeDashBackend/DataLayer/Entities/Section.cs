@@ -7,7 +7,7 @@ namespace DataLayer.Entities
     public class Section
     {
         [Key]
-        public int Id { get; set; }
+        public int SectionId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public float Total { get; set; }

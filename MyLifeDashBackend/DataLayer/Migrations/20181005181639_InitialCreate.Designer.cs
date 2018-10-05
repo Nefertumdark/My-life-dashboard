@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataLayer.Migrations
 {
     [DbContext(typeof(DashContext))]
-    [Migration("20181005174857_SeedCatalogInstrument")]
-    partial class SeedCatalogInstrument
+    [Migration("20181005181639_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,54 +20,54 @@ namespace DataLayer.Migrations
 
             modelBuilder.Entity("DataLayer.Entities.CatInstrument", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("CatInstrumentId")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Name");
 
-                    b.HasKey("Id");
+                    b.HasKey("CatInstrumentId");
 
                     b.ToTable("CatInstruments");
 
                     b.HasData(
-                        new { Id = 1, Name = "Savings" },
-                        new { Id = 2, Name = "Equity MX" },
-                        new { Id = 3, Name = "Debt MX" },
-                        new { Id = 4, Name = "Others MX" },
-                        new { Id = 5, Name = "Equity Tech USA" },
-                        new { Id = 6, Name = "Equity USA" },
-                        new { Id = 7, Name = "Debt USA" }
+                        new { CatInstrumentId = 1, Name = "Savings" },
+                        new { CatInstrumentId = 2, Name = "Equity MX" },
+                        new { CatInstrumentId = 3, Name = "Debt MX" },
+                        new { CatInstrumentId = 4, Name = "Others MX" },
+                        new { CatInstrumentId = 5, Name = "Equity Tech USA" },
+                        new { CatInstrumentId = 6, Name = "Equity USA" },
+                        new { CatInstrumentId = 7, Name = "Debt USA" }
                     );
                 });
 
             modelBuilder.Entity("DataLayer.Entities.Configuration", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ConfigurationId")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Name");
 
                     b.Property<float>("Taxes");
 
-                    b.HasKey("Id");
+                    b.HasKey("ConfigurationId");
 
                     b.ToTable("Configuration");
                 });
 
             modelBuilder.Entity("DataLayer.Entities.ConfigurationInstrument", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ConfigurationInstrumentId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("CatInstrumentsId");
+                    b.Property<int?>("CatInstrumentsCatInstrumentId");
 
                     b.Property<int?>("ConfigurationId");
 
                     b.Property<float>("Percentaje");
 
-                    b.HasKey("Id");
+                    b.HasKey("ConfigurationInstrumentId");
 
-                    b.HasIndex("CatInstrumentsId");
+                    b.HasIndex("CatInstrumentsCatInstrumentId");
 
                     b.HasIndex("ConfigurationId");
 
@@ -76,7 +76,7 @@ namespace DataLayer.Migrations
 
             modelBuilder.Entity("DataLayer.Entities.HistoricalEntry", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("HistoricalEntryId")
                         .ValueGeneratedOnAdd();
 
                     b.Property<int?>("ConfigurationId");
@@ -89,7 +89,7 @@ namespace DataLayer.Migrations
 
                     b.Property<float>("Total");
 
-                    b.HasKey("Id");
+                    b.HasKey("HistoricalEntryId");
 
                     b.HasIndex("ConfigurationId");
 
@@ -100,19 +100,19 @@ namespace DataLayer.Migrations
 
             modelBuilder.Entity("DataLayer.Entities.Plugin", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("PluginId")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Name");
 
-                    b.HasKey("Id");
+                    b.HasKey("PluginId");
 
                     b.ToTable("Plugins");
                 });
 
             modelBuilder.Entity("DataLayer.Entities.Section", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("SectionId")
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("ConfigurationRefId");
@@ -127,7 +127,7 @@ namespace DataLayer.Migrations
 
                     b.Property<float>("Total");
 
-                    b.HasKey("Id");
+                    b.HasKey("SectionId");
 
                     b.HasIndex("ConfigurationRefId")
                         .IsUnique();
@@ -141,7 +141,7 @@ namespace DataLayer.Migrations
                 {
                     b.HasOne("DataLayer.Entities.CatInstrument", "CatInstruments")
                         .WithMany("ConfigurationInstrument")
-                        .HasForeignKey("CatInstrumentsId");
+                        .HasForeignKey("CatInstrumentsCatInstrumentId");
 
                     b.HasOne("DataLayer.Entities.Configuration", "Configuration")
                         .WithMany("ConfigurationInstruments")

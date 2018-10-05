@@ -6,7 +6,7 @@ namespace DataLayer.Entities
     public class Configuration
     {
         [Key]
-        public int Id { get; set; }
+        public int ConfigurationId { get; set; }
         public string Name { get; set; }
         public float Taxes { get; set; }
         public List<HistoricalEntry> HistoricalEntries { get; set; }
