@@ -1,6 +1,6 @@
 ﻿using DataLayer;
 using DataLayer.Entities;
-
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,16 +14,12 @@ namespace ConsoleDash
         static void Main(string[] args)
         {
             using (var db = new DashContext())
-            {
-                db.Plugins.Add(new Plugin { Name = "TestX" });
-                var count = db.SaveChanges();
-                Console.WriteLine("{0} records saved to database", count);
-
-                Console.WriteLine();
-                Console.WriteLine("All blogs in database:");
-                foreach (var plugin in db.Plugins)
+            {            
+                Console.WriteLine("All plugins in database:");
+                var data = db.Plugins.Include(pl => pl.Sections);
+                foreach (var plugin in data)
                 {
-                    Console.WriteLine(" - {0}", plugin.Name);
+                    Console.WriteLine($"{plugin.Name} - Num Secciones {plugin.Sections.Count}");
                 }
             }
         }
