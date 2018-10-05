@@ -151,6 +151,10 @@
     <Compile Include="Migrations\20181004004927_InitialCreate.designer.cs">
       <DependentUpon>20181004004927_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20181005174857_SeedCatalogInstrument.cs" />
+    <Compile Include="Migrations\20181005174857_SeedCatalogInstrument.designer.cs">
+      <DependentUpon>20181005174857_SeedCatalogInstrument.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\DashContextModelSnapshot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="Scripts\Loadexampledata.sql" />
